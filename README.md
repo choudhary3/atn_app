@@ -1,1 +1,2 @@
-# atn_app
+# ATN
+Attendance management android application
