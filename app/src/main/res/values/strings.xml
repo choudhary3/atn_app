@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ATN</string>
+    <string name="forgot_text"><u>Forgot Password?</u></string>
+    <string name="account_text">Dont have an account?</string>
+    <string name="name_text">Name</string>
+    <string name="username_text">Username</string>
+    <string name="password_text">Password</string>
+    <string name="login_text">LOGIN</string>
+    <string name="register_text"><u>Register</u></string>
+</resources>

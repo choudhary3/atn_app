@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff8a0b"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.test.atn.Register">
+
+    <EditText
+        android:id="@+id/name"
+        android:imeOptions="actionNext"
+        android:background="@drawable/input_layout"
+        android:cursorVisible="false"
+        android:textCursorDrawable="@color/black"
+        android:textColor="@color/black"
+        android:hint="@string/name_text"
+        android:textColorHint="#7c8482"
+        android:textSize="20dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="10dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:id="@+id/nameIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:srcCompat="@drawable/user_icon"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="207dp" />
+
+    <EditText
+        android:id="@+id/username"
+        android:imeOptions="actionNext"
+        android:background="@drawable/input_layout"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@color/black"
+        android:textColor="@color/black"
+        android:hint="@string/username_text"
+        android:textColorHint="#7c8482"
+        android:textSize="20dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="10dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:id="@+id/userIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:srcCompat="@drawable/user_icon"
+        android:layout_below="@+id/nameIcon"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="35dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:imeOptions="actionDone"
+        android:background="@drawable/input_layout"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@color/black"
+        android:textColor="@color/black"
+        android:hint="@string/password_text"
+        android:textColorHint="#7c8482"
+        android:textSize="20dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="10dp"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:id="@+id/passIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:srcCompat="@drawable/pass_icon"
+        android:layout_below="@+id/userIcon"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="35dp" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:background="@drawable/button_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="40dp"
+        android:text="@string/register_text"
+        android:textColor="#54ffe2"
+        android:textSize="20dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp" />
+
+</RelativeLayout>
