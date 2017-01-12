@@ -20,12 +20,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Register extends AppCompatActivity {
+    private static final String REGISTER_URL = "http://pcpradeep22.16mb.com/register.php";
     private EditText name;
     private EditText username;
     private EditText password;
     private Button register;
-
-    private static final String REGISTER_URL = "http://pcpradeep22.16mb.com/register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +53,9 @@ public class Register extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(isNetworkAvailable()){
+                        if (isNetworkAvailable()) {
                             registerUser();
-                        }else{
+                        } else {
                             Toast.makeText(getBaseContext(), "No internet Bitch!", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -76,32 +75,32 @@ public class Register extends AppCompatActivity {
         String usernameS = username.getText().toString().trim().toLowerCase();
         String passwordS = password.getText().toString();
 
-        for(int i = 0; i < nameS.length(); i++){
-            if(nameS.charAt(i) == ' '){
+        for (int i = 0; i < nameS.length(); i++) {
+            if (nameS.charAt(i) == ' ') {
                 Toast.makeText(this, "I only require your first name!", Toast.LENGTH_SHORT).show();
-                return ;
+                return;
             }
         }
 
-        for(int i = 0; i < usernameS.length(); i++){
-            if(usernameS.charAt(i) == ' '){
+        for (int i = 0; i < usernameS.length(); i++) {
+            if (usernameS.charAt(i) == ' ') {
                 Toast.makeText(this, "Username cannot contain any space!", Toast.LENGTH_SHORT).show();
-                return ;
+                return;
             }
         }
 
-        for(int i = 0; i < passwordS.length(); i++){
-            if(passwordS.charAt(i) == ' '){
+        for (int i = 0; i < passwordS.length(); i++) {
+            if (passwordS.charAt(i) == ' ') {
                 Toast.makeText(this, "Password cannot contain any space!", Toast.LENGTH_SHORT).show();
-                return ;
+                return;
             }
         }
 
-        register(nameS,usernameS,passwordS);
+        register(nameS, usernameS, passwordS);
     }
 
     private void register(String name, String username, String password) {
-        String urlSuffix = "?name="+name+"&username="+username+"&password="+password;
+        String urlSuffix = "?name=" + name + "&username=" + username + "&password=" + password;
         class RegisterUser extends AsyncTask<String, Void, String> {
 
             ProgressDialog loading;
@@ -109,15 +108,15 @@ public class Register extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(Register.this, "Please Wait",null, true, true);
+                loading = ProgressDialog.show(Register.this, "Please Wait", null, true, true);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(getBaseContext(),s, Toast.LENGTH_SHORT).show();
-                if(s.equalsIgnoreCase("successfully registered!!")){
+                Toast.makeText(getBaseContext(), s, Toast.LENGTH_SHORT).show();
+                if (s.equalsIgnoreCase("successfully registered!!")) {
                     Intent intent = new Intent(Register.this, Login.class);
                     startActivity(intent);
                 }
@@ -128,7 +127,7 @@ public class Register extends AppCompatActivity {
                 String s = params[0];
                 BufferedReader bufferedReader = null;
                 try {
-                    URL url = new URL(REGISTER_URL+s);
+                    URL url = new URL(REGISTER_URL + s);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
@@ -137,7 +136,7 @@ public class Register extends AppCompatActivity {
                     result = bufferedReader.readLine();
 
                     return result;
-                }catch(Exception e){
+                } catch (Exception e) {
                     return null;
                 }
             }

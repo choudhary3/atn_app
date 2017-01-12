@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">ATN</string>
     <string name="forgot_text"><u>Forgot Password?</u></string>
     <string name="account_text">Dont have an account?</string>
@@ -7,4 +9,7 @@
     <string name="password_text">Password</string>
     <string name="login_text">LOGIN</string>
     <string name="register_text"><u>Register</u></string>
+    <string name="logout_text">Log Out</string>
+    <string name="exit_text">Exit</string>
+
 </resources>
