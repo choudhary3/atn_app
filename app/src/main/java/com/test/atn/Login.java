@@ -2,6 +2,7 @@ package com.test.atn;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -9,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -58,26 +60,26 @@ public class Login extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(isNetworkAvailable()){
+                        if (isNetworkAvailable()) {
                             usernameS = username.getText().toString().trim().toLowerCase();
                             passwordS = password.getText().toString();
 
-                            for(int i = 0; i < usernameS.length(); i++){
-                                if(usernameS.charAt(i) == ' '){
+                            for (int i = 0; i < usernameS.length(); i++) {
+                                if (usernameS.charAt(i) == ' ') {
                                     Toast.makeText(getBaseContext(), "Username cannot contain any space!", Toast.LENGTH_SHORT).show();
-                                    return ;
+                                    return;
                                 }
                             }
 
-                            for(int i = 0; i < passwordS.length(); i++){
-                                if(passwordS.charAt(i) == ' '){
+                            for (int i = 0; i < passwordS.length(); i++) {
+                                if (passwordS.charAt(i) == ' ') {
                                     Toast.makeText(getBaseContext(), "Password cannot contain any space!", Toast.LENGTH_SHORT).show();
-                                    return ;
+                                    return;
                                 }
                             }
 
                             loginUser(usernameS, passwordS);
-                        }else{
+                        } else {
                             Toast.makeText(getBaseContext(), "No internet Bitch!", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -105,7 +107,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
-        String urlSuffix = "?username="+username+"&password="+password;
+        String urlSuffix = "?username=" + username + "&password=" + password;
         class LoginUser extends AsyncTask<String, Void, String> {
 
             ProgressDialog loading;
@@ -113,23 +115,23 @@ public class Login extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(Login.this, "Please Wait",null, true, true);
+                loading = ProgressDialog.show(Login.this, "Please Wait", null, true, true);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                if(s.startsWith("W")){
-                    Toast.makeText(getBaseContext(),"Success!", Toast.LENGTH_SHORT).show();
+                if (s.startsWith("W")) {
+                    Toast.makeText(getBaseContext(), "Success!", Toast.LENGTH_SHORT).show();
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putBoolean(LOGIN_CHECK, true);
-                    editor.putString(NAME, s.substring(1,2).toUpperCase() + s.substring(2));
+                    editor.putString(NAME, s.substring(1, 2).toUpperCase() + s.substring(2));
                     editor.commit();
                     startActivity(intentLogin);
-                }else{
-                    Toast.makeText(getBaseContext(),s, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getBaseContext(), s, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -138,7 +140,7 @@ public class Login extends AppCompatActivity {
                 String s = params[0];
                 BufferedReader bufferedReader = null;
                 try {
-                    URL url = new URL(LOGIN_URL+s);
+                    URL url = new URL(LOGIN_URL + s);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
@@ -147,7 +149,7 @@ public class Login extends AppCompatActivity {
                     result = bufferedReader.readLine();
 
                     return result;
-                }catch(Exception e){
+                } catch (Exception e) {
                     return null;
                 }
             }
@@ -157,4 +159,30 @@ public class Login extends AppCompatActivity {
         lu.execute(urlSuffix);
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Exit Application?");
+        alertDialogBuilder
+                .setMessage("Click yes to exit!")
+                .setCancelable(false)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                moveTaskToBack(true);
+                                android.os.Process.killProcess(android.os.Process.myPid());
+                                System.exit(1);
+                            }
+                        })
+
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 }

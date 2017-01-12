@@ -12,11 +12,11 @@
 
     <TextView
         android:id="@+id/welcomeMessage"
-        android:textSize="30dp"
-        android:textColor="@color/colorGreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/colorGreen"
+        android:textSize="30dp" />
 
 </RelativeLayout>
