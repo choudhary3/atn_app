@@ -20,12 +20,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Register extends AppCompatActivity {
+    private static final String REGISTER_URL = "http://pcpradeep22.16mb.com/register.php";
     private EditText name;
     private EditText username;
     private EditText password;
     private Button register;
-
-    private static final String REGISTER_URL = "http://pcpradeep22.16mb.com/register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

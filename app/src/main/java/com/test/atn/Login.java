@@ -3,16 +3,17 @@ package com.test.atn;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,15 +23,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Login extends AppCompatActivity {
-    private EditText username;
-    private EditText password;
-
-    public static final String MESSAGE = "MESSAGE";
+    public static final String LOGIN_CHECK = "LOGGED_IN";
+    public static final String NAME = "NAME";
     private static final String LOGIN_URL = "http://pcpradeep22.16mb.com/login.php";
-
     String usernameS;
     String passwordS;
-
+    private EditText username;
+    private EditText password;
     private Intent intentLogin;
 
     @Override
@@ -121,9 +120,13 @@ public class Login extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                if(s.startsWith("Welcome")){
-                    intentLogin.putExtra(MESSAGE, s);
+                if(s.startsWith("W")){
                     Toast.makeText(getBaseContext(),"Success!", Toast.LENGTH_SHORT).show();
+                    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putBoolean(LOGIN_CHECK, true);
+                    editor.putString(NAME, s.substring(1,2).toUpperCase() + s.substring(2));
+                    editor.commit();
                     startActivity(intentLogin);
                 }else{
                     Toast.makeText(getBaseContext(),s, Toast.LENGTH_SHORT).show();
